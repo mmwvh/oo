@@ -7,38 +7,37 @@
 public class Group {
 
 	private final int number;
-	private Student[] students;
+	private Student[] students = null;
 
 	Group(int n) {
-		number = n;
-		Student[] students = new Student[n];
+		this.number = n;
+		this.students = new Student[n];
 	}
 
 	/**
-	 * 
-	 * @return True als er nog ruimte is in de array; False als de array vol
-	 *         zit.
-	 */
-	private boolean place() {
-		return students.length + 1 < number;
-	}
-
-	/**
-	 * Voegt student toe
+	 * Voegt Student s toe aan de array studenten mits de array nog ruimte
+	 * heeft.
 	 * 
 	 * @param s
-	 *            = Student die dient te worden toegevoegd.
-	 * 
+	 *            = Student object
+	 * @return True als s succesvol is toegevoegd; False anderzijds.
 	 */
-	public void add(Student s) {
-		if (place()) {
-			students[students.length + 1] = s;
+	public boolean add(Student s) {
+
+		for (int i = 0; i < students.length; i++) {
+			if (students[i] == null) {
+				students[i] = s;
+				return true;
+			}
 		}
+		return false;
 	}
+
 	/**
 	 * 
 	 * @param i
-	 * @return
+	 *            = opgevraagde index waarde
+	 * @return Student corresponderend aan de index waarde
 	 */
 	public Student getStudent(int i) {
 		if (students[i] != null) {
