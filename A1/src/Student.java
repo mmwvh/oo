@@ -11,14 +11,9 @@ public class Student {
 	private int studentNr; // Student nummer.
 
 	Student(String fn, String n, int nr) {
-		fn = firstName;
-		n = name;
-		nr = studentNr;
-
-		Student bob = new Student("Bob", "de Vries", 7);
-
-		System.out.print("De student " + bob);
-		bob.setName("Bob", "de Bouwer");
+		firstName = fn;
+		name = n;
+		studentNr = nr;
 	}
 
 	/**
