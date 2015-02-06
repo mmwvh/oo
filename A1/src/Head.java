@@ -15,27 +15,42 @@ public class Head {
 		students = new Group(n);
 		fill(n);
 		print(n);
-		memberId(n);
+		change(n);
 	}
 
+	/**
+	 * 
+	 * @return Gegeven input integer.
+	 */
 	private int intScan() {
 		Scanner scan = new Scanner(System.in);
 		int input = scan.nextInt();
 		return input;
 	}
 
+	/**
+	 * 
+	 * @return Gegeven input string.
+	 */
 	private String strScan() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
 		return input;
 	}
-
+/**
+ * 
+ * @return Gewenste groep grootte.
+ */
 	private int sizeAsk() {
 		System.out.print("How many students are there in this group? \n");
 		int n = intScan();
 		return n;
 	}
-
+/**
+ * Laat de gebruiker de n grote groep invullen.
+ * 
+ * @param n = groep grootte
+ */
 	private void fill(int n) {
 		for (int i = 0; i < n; i++) {
 
@@ -57,12 +72,22 @@ public class Head {
 		System.out.print("\nThe group is now filled.\n");
 	}
 
+	/**
+	 * Print de inhoud van de n grote groep.
+	 * 
+	 * @param n = groep grootte
+	 */
 	private void print(int n) {
 		System.out.print("\nThis group has " + n + " students.\n");
 		students.print();
 	}
 
-	private void memberId(int n) {
+	/**
+	 * Laat de gebruiker een naam van een student, uit de groep met bepaald lidnummer, aanpassen totdat de gebruiker een negatief lidnummer invoert.
+	 * 
+	 * @param n = groep grootte
+	 */
+	private void change(int n) {
 		System.out
 				.print("\nPlease enter the member id of student you wish to rename.\n");
 		int i = intScan();

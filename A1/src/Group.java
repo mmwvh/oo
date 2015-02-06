@@ -10,8 +10,8 @@ public class Group {
 	private Student[] students = null;
 
 	Group(int n) {
-		this.number = n;
-		this.students = new Student[n];
+		this.number = n;	// Groep grootte.
+		this.students = new Student[n];	// Array van studenten.
 	}
 
 	/**
