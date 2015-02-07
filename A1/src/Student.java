@@ -3,6 +3,8 @@
  * 
  * @author Franka Buytenhuijs / s4356845
  * @author Wesley van Hoorn / s4018044
+ * 
+ *         Klasse voor het aanmaken van Student objecten.
  */
 public class Student {
 

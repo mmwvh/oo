@@ -3,6 +3,9 @@
  * 
  * @author Franka Buytenhuijs / s4356845
  * @author Wesley van Hoorn / s4018044
+ * 
+ *         Klasse voor het aanmaken van Group objecten, deze groepen bestaan uit
+ *         Student objecten.
  */
 public class Group {
 
@@ -10,8 +13,8 @@ public class Group {
 	private Student[] students = null;
 
 	Group(int n) {
-		this.number = n;	// Groep grootte.
-		this.students = new Student[n];	// Array van studenten.
+		this.number = n; // Groep grootte.
+		this.students = new Student[n]; // Array van studenten.
 	}
 
 	/**

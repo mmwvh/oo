@@ -5,17 +5,27 @@ import java.util.Scanner;
  * 
  * @author Franka Buytenhuijs / s4356845
  * @author Wesley van Hoorn / s4018044
+ * 
+ *         Hoofdklasse, deze klasse voert alle taken uit en wordt aangeroepen in
+ *         main.
  */
 public class Head {
 
 	Group students = null;
 
 	Head() {
+		int i = 1;
 		int n = sizeAsk();
 		students = new Group(n);
 		fill(n);
 		print(n);
-		change(n);
+		while (i >= 1) {
+			i = change(n, i);
+			if ( i > n){
+				System.out.println("This member id does not exist, please try again.");
+			}
+		}
+
 	}
 
 	/**
@@ -37,20 +47,23 @@ public class Head {
 		String input = scan.nextLine();
 		return input;
 	}
-/**
- * 
- * @return Gewenste groep grootte.
- */
+
+	/**
+	 * 
+	 * @return Gewenste groep grootte.
+	 */
 	private int sizeAsk() {
 		System.out.print("How many students are there in this group? \n");
 		int n = intScan();
 		return n;
 	}
-/**
- * Laat de gebruiker de n grote groep invullen.
- * 
- * @param n = groep grootte
- */
+
+	/**
+	 * Laat de gebruiker de n grote groep invullen.
+	 * 
+	 * @param n
+	 *            = groep grootte
+	 */
 	private void fill(int n) {
 		for (int i = 0; i < n; i++) {
 
@@ -75,7 +88,8 @@ public class Head {
 	/**
 	 * Print de inhoud van de n grote groep.
 	 * 
-	 * @param n = groep grootte
+	 * @param n
+	 *            = groep grootte
 	 */
 	private void print(int n) {
 		System.out.print("\nThis group has " + n + " students.\n");
@@ -83,23 +97,29 @@ public class Head {
 	}
 
 	/**
-	 * Laat de gebruiker een naam van een student, uit de groep met bepaald lidnummer, aanpassen totdat de gebruiker een negatief lidnummer invoert.
+	 * Laat de gebruiker een naam van een student, uit de groep met bepaald
+	 * lidnummer, aanpassen totdat de gebruiker een negatief lidnummer invoert.
 	 * 
-	 * @param n = groep grootte
+	 * @param n
+	 *            = groep grootte
 	 */
-	private void change(int n) {
+	private int change(int n, int i) {
+
 		System.out
 				.print("\nPlease enter the member id of student you wish to rename.\n");
-		int i = intScan();
-		Student student = students.getStudent(i - 1);
+		i = intScan();
+		if (i > 0 && i <= n) {
+			Student student = students.getStudent(i - 1);
 
-		System.out.print("Enter a new first name of student" + i + ".\n");
-		String firstname = strScan();
+			System.out.print("Enter a new first name of student" + i + ".\n");
+			String firstname = strScan();
 
-		System.out.print("Enter a new last name of student" + i + ".\n\n");
-		String lastname = strScan();
+			System.out.print("Enter a new last name of student" + i + ".\n");
+			String lastname = strScan();
 
-		student.setName(firstname, lastname);
-		this.print(n);
+			student.setName(firstname, lastname);
+			this.print(n);
+		}
+		return i;
 	}
 }
