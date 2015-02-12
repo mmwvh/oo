@@ -10,4 +10,17 @@ package oo15opg02galgje;
 
 public class Galg {
 
+	Galg(String s) {
+
+	}
+
+	Galg() {
+
+		WoordLezer w = new WoordLezer("woorden.txt");
+		String woord = w.geefWoord();
+		
+		System.out.print( woord);
+
+	}
+
 }
