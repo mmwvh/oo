@@ -68,26 +68,29 @@ public class Galg {
 		System.out.println("\nDit is uw hint: ");
 		System.out.println(geradenWoord);
 
-		if (fouten == 10) {
+		if (fouten == 11) {
 			System.out.println("U hangt! Het juiste woord was " + woord);
-		}
 
-		int counter = 0;
-		for (int i = 0; i < woord.length(); i++) {
-			if (geradenWoord.charAt(i) == '.') {
-				counter++;
+			int counter = 0;
+			for (int i = 0; i < woord.length(); i++) {
+				if (geradenWoord.charAt(i) == '.') {
+					counter++;
+				}
 			}
-		}
-		if (counter == 0) {
-			System.out
-					.println("U heeft het woord geraden! Het juiste woord was inderdaad "
-							+ woord);
+			if (counter == 0) {
+				System.out
+						.println("U heeft het woord geraden! Het juiste woord was inderdaad "
+								+ woord);
+				return true;
+			} else if (counter != 0) {
+				System.out
+						.println("U heeft het woord nog niet geraden! U mag nog "
+								+ (10 - fouten) + " fouten maken.");
+				return false;
+			}
 			return true;
-		} else {
-			System.out.println("U heeft het woord nog niet geraden! U mag nog "
-					+ (10 - fouten) + " fouten maken.");
-			return false;
 		}
+		return false;
 	}
 
 }
