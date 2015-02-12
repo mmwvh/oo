@@ -6,9 +6,16 @@
  * 
  **/
 
-package interactie;
+package galgje;
 
-public class Controller {
+import interactie.View;
 
-	// alle vormen van input van de gebruiker
+public class Main {
+
+	public static void main(String[] args) {
+
+		new View();
+
+	}
+
 }

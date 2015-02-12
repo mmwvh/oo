@@ -8,24 +8,86 @@
 
 package model;
 
-
 public class Galg {
 
-	Galg(String s) {
+	private String woord;
+	private StringBuilder misser = new StringBuilder();
+	private StringBuilder correct = new StringBuilder();
+	private StringBuilder geradenWoord = new StringBuilder();
+	private int fouten = 0;
 
-		// Stringbuilder die zo groot is als de string woord gevuld met ". "
-		// Bij goed geraden letter worden de corresponderende indexwaarden vervangen
-		// Zodra de Stringbuilder geen ". " meer bevat heeft de speler het spel gewonnen (of strcompare)
-		// Een foute letter wordt toegevoegd aan een array[10] de inhoud wordt geprint en als deze array vol zit eindigd het spel en heeft de speler verloren
+	public Galg(String s) {
+		this.woord = s;
+		dots();
 	}
 
 	public Galg() {
 
-		WoordLezer w = new WoordLezer("woorden.txt");
-		String woord = w.geefWoord();
-		
-		System.out.print( woord);
+		WoordLezer wl = new WoordLezer("woorden.txt");
+		woord = wl.geefWoord();
+		dots();
+	}
 
+	private void dots() {
+		for (int i = 0; i < woord.length(); i++) {
+			geradenWoord.append('.');
+		}
+	}
+
+	private boolean duplicate(StringBuilder s, char u) {
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == u) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void checkLetter(char u) {
+		boolean aanpassing = false;
+		for (int i = 0; i < woord.length(); i++) {
+			char c = woord.charAt(i);
+			if (c == u) {
+				if (!duplicate(correct, u)) {
+					correct.append(u);
+				}
+				geradenWoord.setCharAt(i, u);
+				aanpassing = true;
+			}
+		}
+		if (!aanpassing) {
+			System.out.println("Deze letter zat niet in het woord");
+			if (!duplicate(misser, u)) {
+				misser.append(u);
+				fouten++;
+			}
+		}
+	}
+
+	public boolean huidigeToestand() {
+		System.out.println("\nDit is uw hint: ");
+		System.out.println(geradenWoord);
+
+		if (fouten == 10) {
+			System.out.println("U hangt! Het juiste woord was " + woord);
+		}
+
+		int counter = 0;
+		for (int i = 0; i < woord.length(); i++) {
+			if (geradenWoord.charAt(i) == '.') {
+				counter++;
+			}
+		}
+		if (counter == 0) {
+			System.out
+					.println("U heeft het woord geraden! Het juiste woord was inderdaad "
+							+ woord);
+			return true;
+		} else {
+			System.out.println("U heeft het woord nog niet geraden! U mag nog "
+					+ (10 - fouten) + " fouten maken.");
+			return false;
+		}
 	}
 
 }
