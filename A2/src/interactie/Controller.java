@@ -6,8 +6,9 @@
  * 
  **/
 
-package oo15opg02interactie;
+package interactie;
 
-public class View {
+public class Controller {
 
+	// alle vormen van input van de gebruiker
 }

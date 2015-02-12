@@ -2,7 +2,7 @@
  * Genereert een pseudorandom woord uit een tekstfile
  */
 
-package oo15opg02galgje;
+package model;
 
 import java.util.Scanner;
 import java.util.Random;

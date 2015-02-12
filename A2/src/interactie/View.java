@@ -6,14 +6,10 @@
  * 
  **/
 
-package oo15opg02galgje;
+package interactie;
 
-public class Main {
-
-	public static void main(String[] args) {
-
-		new Galg();
-
-	}
+public class View {
+	
+	// de output van het scherm met info naar de gebruiker
 
 }
