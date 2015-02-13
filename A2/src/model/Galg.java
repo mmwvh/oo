@@ -15,8 +15,6 @@ public class Galg {
 	private StringBuilder correct = new StringBuilder();
 	private StringBuilder geradenWoord = new StringBuilder();
 
-	// private int fouten = 0;
-
 	public Galg(String s) {
 		this.woord = s;
 		dots();
@@ -65,7 +63,7 @@ public class Galg {
 	 * @param u
 	 *            De input character van de user
 	 */
-	public void checkLetter(char u) {
+	public boolean checkLetter(char u) {
 		boolean aanpassing = false;
 		char c;
 		for (int i = 0; i < woord.length(); i++) {
@@ -76,42 +74,51 @@ public class Galg {
 				}
 				geradenWoord.setCharAt(i, u);
 				aanpassing = true;
+
 			}
 		}
 		if (!aanpassing) {
-			// System.out.println("Deze letter zat niet in het woord");
 			if (!duplicate(misser, u)) {
 				misser.append(u);
-				// fouten++;
-			}
-		}
-	}
-
-	public boolean gameState() {
-
-		while (misser.length() < 10) {
-			if (geradenWoord.equals(woord)) {
-				return true;
 			}
 			return false;
+		} else {
+			return true;
 		}
+	}
 
+	/**
+	 * 
+	 * @return TRUE als er 10 fouten zijn gemaakt; FALSE anderzijds.
+	 */
+	public boolean dead() {
+		if (!(misser.length() < 10)) {
+			return true;
+		}
 		return false;
 	}
-	/*
-	 * public boolean huidigeToestand() {
-	 * System.out.println("\nDit is uw hint: ");
-	 * System.out.println(geradenWoord);
+
+	/**
 	 * 
-	 * if (fouten == 11) { System.out.println("U hangt! Het juiste woord was " +
-	 * woord);
-	 * 
-	 * int counter = 0; for (int i = 0; i < woord.length(); i++) { if
-	 * (geradenWoord.charAt(i) == '.') { counter++; } } if (counter == 0) {
-	 * System.out
-	 * .println("U heeft het woord geraden! Het juiste woord was inderdaad " +
-	 * woord); return true; } else if (counter != 0) { System.out
-	 * .println("U heeft het woord nog niet geraden! U mag nog " + (10 - fouten)
-	 * + " fouten maken."); return false; } return true; } return false; }
+	 * @return TRUE als het woord geraden is; False anderzijds.
 	 */
+	public boolean gameState() {
+		if (geradenWoord.toString().equals(woord)) {
+			return true;
+		}
+		return false;
+	}
+
+	public String getW() {
+		return this.woord;
+	}
+
+	public String getGW() {
+		return this.geradenWoord.toString();
+	}
+
+	public String getM() {
+		return this.misser.toString();
+	}
+
 }
