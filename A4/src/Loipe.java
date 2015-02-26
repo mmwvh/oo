@@ -83,7 +83,7 @@ public class Loipe implements InfoLoipe {
 					loipe[x][y] = Fragment.NO;
 					huidig = Richting.O;
 				} else
-					crossNZ();
+					crossNZ(x, y);
 				break;
 			case O:
 				x++;
@@ -95,8 +95,9 @@ public class Loipe implements InfoLoipe {
 
 					loipe[x][y] = Fragment.NW;
 					huidig = Richting.N;
-				} else
-					crossOW();
+				} else {
+					crossOW(x, y);
+				}
 				break;
 			case W:
 				x--;
@@ -109,7 +110,7 @@ public class Loipe implements InfoLoipe {
 					loipe[x][y] = Fragment.ZO;
 					huidig = Richting.Z;
 				} else
-					crossOW();
+					crossOW(x, y);
 				
 				break;
 			default:
@@ -123,7 +124,7 @@ public class Loipe implements InfoLoipe {
 					loipe[x][y] = Fragment.ZW;
 					huidig = Richting.W;
 				} else 
-					crossNZ();
+					crossNZ(x, y);
 				
 				break;
 			}
@@ -158,19 +159,21 @@ public class Loipe implements InfoLoipe {
 		}
 	}
 
-	private void crossNZ() {
+	private void crossNZ(int x, int y) {
 		if (loipe[x][y] != null) {
 			loipe[x][y] = Fragment.KR;
-		} else
+		} else {
 			loipe[x][y] = Fragment.NZ;
+		}
 		
 	}
 
-	private void crossOW() {
+	private void crossOW(int x, int y) {
 		if (loipe[x][y] != null) {
 			loipe[x][y] = Fragment.KR;
-		} else
+		} else {
 			loipe[x][y] = Fragment.OW;
+		}
 	}
 
 	public int getX() {

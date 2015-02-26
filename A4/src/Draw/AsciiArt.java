@@ -31,7 +31,6 @@ public class AsciiArt implements TekenLoipe {
 					switch (frag) {
 					case NZ:
 						parcours[i][j] = '|';
-						System.out.println("1");
 						break;
 					case OW:
 						parcours[i][j] = '-';
@@ -57,7 +56,7 @@ public class AsciiArt implements TekenLoipe {
 					}
 				}
 				else {
-					parcours[i][j] = '0' ;
+					parcours[i][j] = ' ' ;
 				}
 			}
 		}
