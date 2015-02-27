@@ -6,16 +6,22 @@ public class AsciiArt implements TekenLoipe {
 	private int y;
 	private InfoLoipe s;
 	private char[][] parcours;
+	private int i;
 
+	/**
+	 * initialiseerd de array voor de ascii tekens met de juiste grootte 
+	 * @param s
+	 */
 	public void setLoipe(InfoLoipe s) {
 		this.x = s.getWidth();
 		this.y = s.getHeight();
 		loipe = new Fragment[x][y];
 		this.s = s;
 		parcours = new char[x][y];
-
 	}
-
+/**
+ * zet alle juiste ascii tekens op de goede plaats
+ */
 	public void teken() {
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
@@ -50,10 +56,12 @@ public class AsciiArt implements TekenLoipe {
 			}
 		}
 	}
-
+	
+	/**
+	 * print het parcours in ascii style
+	 */
 	public void print() {
 		for (int j = 0; j < y; j++) {
-
 			for (int i = 0; i < x; i++) {
 				System.out.print(parcours[i][j]);
 			}
@@ -61,15 +69,16 @@ public class AsciiArt implements TekenLoipe {
 		}
 	}
 
-	
+	/**
+	 * zet op de volgende plaats een * neer
+	 */
 	public void setPosition(Punt p) {
 		
-		p = s.start();
 		int x = p.getX();
 		int y = p.getY();
 		this.teken();
 		parcours[x][y] = '*';
 		this.print();
-		
+	
 		}
 }

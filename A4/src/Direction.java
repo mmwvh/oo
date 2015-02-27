@@ -17,6 +17,10 @@ public enum Direction {
 		this.dy = dy;
 	}
 
+	/**
+	 * veranderd de richting indien je naar links draait
+	 * @return
+	 */
 	public Direction turnLeft() {
 		switch (this) {
 		case N:
@@ -32,6 +36,10 @@ public enum Direction {
 		}
 	}
 
+	/**
+	 * veranderd de richting indien je naar rechts draait
+	 * @return
+	 */
 	public Direction turnRight() {
 		switch (this) {
 		case N:

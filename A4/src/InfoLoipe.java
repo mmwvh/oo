@@ -9,7 +9,7 @@
 public interface InfoLoipe {
 	public Punt start(); // het startpunt op de kaart
 
-	public Punt stap(); // het volgende punt op de route
+	public Punt stap(int i); // het volgende punt op de route
 
 	public int getWidth(); // grootte in oost-west richting
 

@@ -10,14 +10,19 @@ public class Loipe implements InfoLoipe {
 	private String pad;
 	private Direction huidig = Direction.N;
 	private Fragment[][] loipe;
-
+	private Punt[] puntArray;
+	
 	public Loipe(String pad) {
 		this.pad = pad;
+		puntArray = new Punt[pad.length()];
 		loipeSize();
 		loipe = new Fragment[Math.abs(xmin - xmax) + 1][Math.abs(ymin - ymax) + 1];
 		loipeFill();
 	}
 
+	/**
+	 * bepaald de lengte en breedte van hte parcours
+	 */
 	private void loipeSize() {
 
 		for (int i = 0; i < (pad.length()); i++) {
@@ -36,82 +41,43 @@ public class Loipe implements InfoLoipe {
 		}
 	}
 
+	/**
+	 * vult de 2 dimeonsionale array met de juiste fragmenten op de juiste plaats
+	 */
 	private void loipeFill() {
 		x = Math.abs(xmin);
 		y = Math.abs(ymin - 1);
 		huidig = Direction.N;
+		Fragment frag = Fragment.NW; // ter inistialisatie, bij initialisatie
+										// null kwam null pointer exception
 
 		for (int i = 0; i < (pad.length()); i++) {
 			char nextStep = pad.charAt(i);
 			move(huidig);
-
-			switch (huidig) {
-			case Z:
-				if (nextStep == 'r') {
-
-					loipe[x][y] = Fragment.NW;
-					huidig = huidig.turnRight();
-				} else if (nextStep == 'l') {
-
-					loipe[x][y] = Fragment.NO;
-					huidig = huidig.turnLeft();
-				} else {
-					crossNZ(x, y);
-				}
-
-				break;
-			case O:
-				if (nextStep == 'r') {
-
-					loipe[x][y] = Fragment.ZW;
-					huidig = huidig.turnRight();
-
-				} else if (nextStep == 'l') {
-
-					loipe[x][y] = Fragment.NW;
-					huidig = huidig.turnLeft();
-				} else {
-					crossOW(x, y);
-				}
-
-				break;
-			case W:
-				if (nextStep == 'r') {
-
-					loipe[x][y] = Fragment.NO;
-					huidig = huidig.turnRight();
-				} else if (nextStep == 'l') {
-
-					loipe[x][y] = Fragment.ZO;
-					huidig = huidig.turnLeft();
-				} else {
-					crossOW(x, y);
-				}
-
-				break;
-			default:
-				if (nextStep == 'r') {
-
-					loipe[x][y] = Fragment.ZO;
-					huidig = huidig.turnRight();
-				} else if (nextStep == 'l') {
-
-					loipe[x][y] = Fragment.ZW;
-					huidig = huidig.turnLeft();
-				} else {
-					crossNZ(x, y);
-				}
-
-				break;
+			frag = frag.makeStep(nextStep, huidig, this);
+			loipe[x][y] = frag;
+			if (nextStep == 'r') {
+				huidig = huidig.turnRight();
+			} else if (nextStep == 'l') {
+				huidig = huidig.turnLeft();
 			}
+			puntArray[i] = new Punt(x,y);
 		}
 	}
 
+	/**
+	 * past de huidige x en y waarde aan door de verplaatsing
+	 * @param d
+	 */
 	private void move(Direction d) {
 		x += d.dx;
 		y += d.dy;
 	}
 
+	/**
+	 * als x kleiner is dan de huidige xmax verhoog xmax dan naar x, dit in verband met bochten
+	 * @return ymin
+	 */
 	private int xMax() {
 		if (x > xmax) {
 			xmax = x;
@@ -119,6 +85,10 @@ public class Loipe implements InfoLoipe {
 		return xmax;
 	}
 
+	/**
+	 * als x kleiner is dan de huidige xmin verlaag xmin dan naar x
+	 * @return xmin
+	 */
 	private int xMin() {
 		if (x < xmin) {
 			xmin = x;
@@ -126,6 +96,10 @@ public class Loipe implements InfoLoipe {
 		return xmin;
 	}
 
+	/**
+	 * als y groter is dan de huidige ymax verhoog ymin dan naar y
+	 * @return ymax
+	 */
 	private int yMax() {
 		if (y > ymax) {
 			ymax = y;
@@ -133,6 +107,10 @@ public class Loipe implements InfoLoipe {
 		return ymax;
 	}
 
+	/**
+	 * als y kleiner is dan de huidige ymin verlaag ymin dan naar y
+	 * @return ymin
+	 */
 	private int yMin() {
 		if (y < ymin) {
 			ymin = y;
@@ -140,23 +118,13 @@ public class Loipe implements InfoLoipe {
 		return ymin;
 	}
 
-	private void crossNZ(int x, int y) {
-		if (loipe[x][y] != null) {
-			loipe[x][y] = Fragment.KR;
-		} else {
-			loipe[x][y] = Fragment.NZ;
-		}
-
+	public Fragment getLoipexy() {
+		return loipe[x][y];
 	}
 
-	private void crossOW(int x, int y) {
-		if (loipe[x][y] != null) {
-			loipe[x][y] = Fragment.KR;
-		} else {
-			loipe[x][y] = Fragment.OW;
-		}
-	}
-
+	/**
+	 * returned de start positie
+	 */
 	public Punt start() {
 		x = Math.abs(xmin);
 		y = Math.abs(ymin - 1);
@@ -164,10 +132,13 @@ public class Loipe implements InfoLoipe {
 		return start;
 	}
 
-	public Punt stap() {
-		Punt stap = new Punt(x,y);
+	/**
+	 * returned de stap op postitie i in de array van punten die bezocht zijn en waar een fragment staat 
+	 */
+	public Punt stap(int i) {
+		Punt stap = puntArray[i];
 		return stap;
-		
+
 	}
 
 	public int getWidth() {
