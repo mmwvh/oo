@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -6,12 +7,6 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import Enum.Fragment;
-import Interface.InfoLoipe;
-import Interface.TekenLoipe;
-
-import com.sun.javafx.scene.paint.GradientUtils.Point;
 
 /**
  *
@@ -42,13 +37,13 @@ public class LoipePlaatje extends JFrame implements TekenLoipe {
 	/**
 	 * previous position for walking the loipe
 	 */
-	private Point previousPos = null;
+	private Punt previousPos = null;
 
 	/**
 	 * Constructor. Fill all icons.
 	 */
 	public LoipePlaatje(InfoLoipe s) {
-		super("Kaart");
+		super("Loipe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		nz = plaatje("nz");
 		ow = plaatje("ow");
@@ -86,10 +81,10 @@ public class LoipePlaatje extends JFrame implements TekenLoipe {
 		if (loipe == null) {
 			System.err.println("Illegale loipe: null pointer");
 			loipeOK = false;
-		} else if (loipe.getY() == 0) {
+		} else if (loipe.getHeight() == 0) {
 			System.err.println("Illegale loipe: height should be at least 1");
 			loipeOK = false;
-		} else if (loipe.getX() == 0) {
+		} else if (loipe.getWidth() == 0) {
 			System.err.println("Illegale loipe: width should be at least 1");
 			loipeOK = false;
 		}
@@ -102,7 +97,7 @@ public class LoipePlaatje extends JFrame implements TekenLoipe {
 	 */
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(loipe.getX() * UNIT, loipe.getY() * UNIT);
+		return new Dimension(loipe.getWidth() * UNIT, loipe.getHeight() * UNIT);
 	}
 
 	/**
@@ -138,8 +133,8 @@ public class LoipePlaatje extends JFrame implements TekenLoipe {
 	public void paint(Graphics g) {
 		super.paint(g);
 		g = panel.getGraphics();
-		for (int i = 0; i < loipe.getX(); i += 1) {
-			for (int j = 0; j < loipe.getY(); j += 1) {
+		for (int i = 0; i < loipe.getWidth(); i += 1) {
+			for (int j = 0; j < loipe.getHeight(); j += 1) {
 				tekenFragment(g, i, j);
 			}
 		}
@@ -196,7 +191,8 @@ public class LoipePlaatje extends JFrame implements TekenLoipe {
 	@Override
 	public void teken() {
 		if (loipeOK) {
-			setSize(loipe.getX() * UNIT, loipe.getY() * UNIT + UNIT / 2);
+			setSize(loipe.getWidth() * UNIT, loipe.getHeight() * UNIT + UNIT
+					/ 2);
 			setVisible(true); // make frame visible
 		} else
 			System.err
@@ -204,7 +200,7 @@ public class LoipePlaatje extends JFrame implements TekenLoipe {
 	}
 
 	@Override
-	public void setPosition(Point p) {
+	public void setPosition(Punt p) {
 		Graphics g = panel.getGraphics();
 		if (previousPos != null) {
 			g.setColor(SNOW);

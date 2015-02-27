@@ -1,5 +1,3 @@
-package Interface;
-import Enum.Fragment;
 
 /**
  * Object Orientation Artificial Intelligence
@@ -9,9 +7,13 @@ import Enum.Fragment;
  * 
  */
 public interface InfoLoipe {
-	public int getX(); // grootte in oost-west richting
+	public Punt start(); // het startpunt op de kaart
 
-	public int getY(); // grootte in noord-zuid richting
+	public Punt stap(); // het volgende punt op de route
+
+	public int getWidth(); // grootte in oost-west richting
+
+	public int getHeight(); // grootte in noord-zuid richting
 
 	public Fragment getFragment(int x, int y); // fragment van de loipe op
 												// positie(x,y)

@@ -1,5 +1,3 @@
-package Enum;
-
 /**
  * Object Orientation Artificial Intelligence
  * 
@@ -7,6 +5,6 @@ package Enum;
  * @author Wesley van Hoorn / s4018044
  * 
  */
-public enum Richting {
-	N, Z, O, W
+public enum Fragment {
+	NZ, OW, NO, NW, ZO, ZW, KR
 }

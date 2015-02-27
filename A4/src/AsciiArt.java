@@ -1,8 +1,3 @@
-package Draw;
-
-import Enum.Fragment;
-import Interface.InfoLoipe;
-import Interface.TekenLoipe;
 
 public class AsciiArt implements TekenLoipe {
 
@@ -13,13 +8,11 @@ public class AsciiArt implements TekenLoipe {
 	private char[][] parcours;
 
 	public void setLoipe(InfoLoipe s) {
-		this.x = s.getX();
-		this.y = s.getY();
+		this.x = s.getWidth();
+		this.y = s.getHeight();
 		loipe = new Fragment[x][y];
 		this.s = s;
 		parcours = new char[x][y];
-		teken();
-		print(); 
 
 	}
 
@@ -47,28 +40,36 @@ public class AsciiArt implements TekenLoipe {
 					case ZW:
 						parcours[i][j] = '.';
 						break;
-					case KR:
+					default:
 						parcours[i][j] = '+';
 						break;
-					default:
-						parcours[i][j] = ' ';
-
 					}
-				}
-				else {
-					parcours[i][j] = ' ' ;
+				} else {
+					parcours[i][j] = ' ';
 				}
 			}
 		}
 	}
 
 	public void print() {
-		for (int i = 0; i < x; i++) {
+		for (int j = 0; j < y; j++) {
 
-			for (int j = 0; j < y; j++) {
+			for (int i = 0; i < x; i++) {
 				System.out.print(parcours[i][j]);
 			}
 			System.out.println();
 		}
 	}
+
+	
+	public void setPosition(Punt p) {
+		
+		p = s.start();
+		int x = p.getX();
+		int y = p.getY();
+		this.teken();
+		parcours[x][y] = '*';
+		this.print();
+		
+		}
 }

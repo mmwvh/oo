@@ -1,4 +1,3 @@
-import Draw.AsciiArt;
 
 /**
  * Object Orientation Artificial Intelligence
@@ -11,10 +10,16 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String pad = "srsssssrsslsssllssssss";
-		Loipe L = new Loipe(pad);
-		AsciiArt ascii = new AsciiArt();
-		ascii.setLoipe(L);
+		String pad = "srssrsslsllsss";
+		Punt p = new Punt(0,0);
+		Loipe l = new Loipe(pad);
+		AsciiArt aa = new AsciiArt();
+		aa.setLoipe(l);
+		aa.teken();
+		aa.print();
+		aa.setPosition(p);
+		LoipePlaatje lp = new LoipePlaatje(l);
+		lp.teken();
 		
 		
 	}
