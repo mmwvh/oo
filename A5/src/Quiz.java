@@ -11,6 +11,7 @@ public class Quiz {
 
 	private List<Vraag> spel;
 	private String antwoord;
+	private int score = 0;
 	Controller controller = new Controller();
 	View view = new View();
 
@@ -29,7 +30,7 @@ public class Quiz {
 			antwoord = controller.getAntwoord();
 			update(v);
 		}
-		view.gefeliciteerd();
+		view.gefeliciteerd(score);
 	}
 
 	/**
@@ -41,10 +42,12 @@ public class Quiz {
 	private void update(Vraag v) {
 		spel.remove(0);
 		if (!v.isCorrect(antwoord)) {
+			score -= 1;
 			view.fout();
 			spel.add(v);
-			return;
+		} else {
+			score += 2;
+			view.correct();
 		}
-		view.correct();
 	}
 }
