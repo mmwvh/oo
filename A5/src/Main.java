@@ -20,6 +20,9 @@ public class Main {
 
 	}
 
+	/**
+	 * Initialiseerd de vragenlijst en start het spel
+	 */
 	private Main() {
 		vulOpen();
 		vulMeer();
