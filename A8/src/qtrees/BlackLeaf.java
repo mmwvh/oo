@@ -3,35 +3,27 @@
  */
 package qtrees;
 
+import java.io.IOException;
 import java.io.Writer;
 
 /**
- * @author mmwvh
+ * @author Franka Buytenhuijs, Wesley van Hoorn s4356845, s4018044
  *
  */
-public class BlackLeaf extends QTNode{
+public class BlackLeaf extends QTNode {
 
 	@Override
 	public void fillBitmap(int x, int y, int width, Bitmap bitmap) {
-		// TODO Auto-generated method stub
-		
+		fillArea(x, y, width, bitmap, false);
 	}
 
 	@Override
 	public void writeNode(Writer out) {
-		// TODO Auto-generated method stub
-		
+		try {
+			out.write("00");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public boolean sameLeaf(QTNode other_node) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int countBlacks(int n) {
-		return n*n;
-	}
-
 }

@@ -21,8 +21,22 @@ public class QTree {
 
 	public void writeQTree(Writer sb) {
 		root.writeNode(sb);
+		try {
+			sb.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * Recursively generate a QTree from an input string
+	 * 
+	 * @param input
+	 *            stringreader
+	 * @return nodes corresponding to the input string: WhiteLeaf, BlackLeaf or
+	 *         GreyNode
+	 */
 	private static QTNode readQTree(Reader input) {
 		try {
 			int r = input.read();
@@ -34,12 +48,13 @@ public class QTree {
 				}
 				return new WhiteLeaf();
 			}
-						
-			for(int i =0; i<4; i++){
-				readQTree(input);
+
+			GreyNode grey = new GreyNode();
+			for (int i = 0; i < 4; i++) {
+				grey.setChildren(readQTree(input), i);
 			}
-			return new GreyNode();
-			
+			return grey;
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,8 +62,43 @@ public class QTree {
 		return null;
 	}
 
+	/**
+	 * Recursively generate a QTree from a bitmap
+	 * 
+	 * @param x
+	 *            coordinate
+	 * @param y
+	 *            coordinate
+	 * @param width
+	 * @param bitmap
+	 *            current bitmap
+	 * @return nodes corresponding to the bitmap: WhiteLeaf, BlackLeaf or
+	 *         GreyNode
+	 */
 	public static QTNode bitmap2QTree(int x, int y, int width, Bitmap bitmap) {
-		return null;
+		int c = 0;
+		for (int i = y; i < width; i++) {
+			for (int j = x; j < width; j++) {
+				if (!bitmap.getBit(j, i)) {
+					c++;
+				}
+			}
+		}
+		if (c == 0) {
+			return new WhiteLeaf();
+		}
+		if (c == (width * width)) {
+			return new BlackLeaf();
+		}
+		GreyNode grey = new GreyNode();
+		grey.setChildren(bitmap2QTree(x, y, width / 2, bitmap), 0);
+		grey.setChildren(bitmap2QTree(x + (width / 2), y, width / 2, bitmap), 1);
+		grey.setChildren(
+				bitmap2QTree(x + (width / 2), y + (width / 2), width / 2,
+						bitmap), 2);
+		grey.setChildren(bitmap2QTree(x, y + (width / 2), width / 2, bitmap), 3);
+
+		return grey;
 	}
 
 }
