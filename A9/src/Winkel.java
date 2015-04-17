@@ -53,13 +53,19 @@ public class Winkel {
         }
     }
 
+    public void nieuwGebruiker(Gebruiker g){
+    	if(!leden.contains(g)){
+    		leden.add(g);
+    	}	
+    }
+    
     public void nieuwArtikel(Artikel art) {
         producten.add(art);
     }
 
     public void toon() {
-        for (Artikel art : producten) {
-            System.out.println(art);
+        for (int i = 0; i<producten.size(); i++) {
+            System.out.println(i+1 + " " + producten.get(i));
         }
     }
     
@@ -69,5 +75,9 @@ public class Winkel {
 	 */
 	public void remove(Artikel a) {
 		producten.remove(a);
+	}
+	
+	public Artikel getArtikel(int i){
+		return producten.get(i);
 	}
 }

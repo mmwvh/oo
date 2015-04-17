@@ -2,6 +2,9 @@ public class Gebruiker {
 
 	private int UserID;
 
+	public Gebruiker(int ID){
+		this.UserID = ID;
+	}
 	public int getUserID() {
 		return this.UserID;
 	}
