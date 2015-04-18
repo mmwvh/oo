@@ -2,6 +2,7 @@ import java.io.Serializable;
 
 /**
  *
+ * @author Franka Buytenhuijs, Wesley van Hoorn s4356845, s4018044
  * @author Sjaak Smetsers
  */
 public class Artikel implements Serializable {
@@ -24,7 +25,7 @@ public class Artikel implements Serializable {
 
 	/**
 	 * 
-	 * @param n
+	 * @param n Artikel naam
 	 */
 	public void setArtNaam(String n) {
 		this.artNaam = n;
@@ -32,12 +33,16 @@ public class Artikel implements Serializable {
 
 	/**
 	 * 
-	 * @param p
+	 * @param p Artikel prijs
 	 */
 	public void setPrijs(double p) {
 		this.prijs = p;
 	}
 
+	/**
+	 * 
+	 * @param c Artikel categorie
+	 */
 	public void setCategorie(Categorie c) {
 		this.categorie = c;
 	}

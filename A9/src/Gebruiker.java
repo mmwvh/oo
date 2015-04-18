@@ -1,4 +1,11 @@
-public class Gebruiker {
+import java.io.Serializable;
+
+/**
+ * @author Franka Buytenhuijs, Wesley van Hoorn s4356845, s4018044
+ *
+ */
+
+public class Gebruiker implements Serializable {
 
 	private int UserID;
 
