@@ -1,5 +1,10 @@
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -9,13 +14,26 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * Object Orientation Artificial Intelligence
+ * 
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
+ */
+
 public class ParseXMLDOM {
 	private DocumentBuilderFactory dbf;
 	private DocumentBuilder db;
 	private Document doc;
 	private String[] name;
-	private JTable table; 
-
+	private String Temperatuur;
+	private String Datum;
+	private String Luchtvochtigheid;
+	private String Windsnelheid;
+	private String Windrichting;
+	private String Regen;
+	private BufferedImage img;
 	public ParseXMLDOM() {
 		try {
 			dbf = DocumentBuilderFactory.newInstance();
@@ -26,10 +44,13 @@ public class ParseXMLDOM {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Weerstation();
+		weerStation();
 	}
 
-	private void Weerstation() {
+	/**
+	 * leest de stationsnamen uit de XML uit
+	 */
+	private void weerStation() {
 		try {
 			NodeList items = doc.getElementsByTagName("weerstation");
 			name = new String[items.getLength()];
@@ -48,6 +69,11 @@ public class ParseXMLDOM {
 		}
 	}
 	
+	/**
+	 * leest de info van het station op de index "index" in het bestand uit
+	 * @param station
+	 * @param index
+	 */
 	public void ShowWeather(String station, int index){
 		String[] columnNames = {"Datum", "Temperatuur", "Windsnelheid", "Windrichting", "Luchtvochtigheid", "Regen in mm per uur"};
 		try {
@@ -56,24 +82,28 @@ public class ParseXMLDOM {
 				if (n.getNodeType() == Node.ELEMENT_NODE) {
 					Element e = (Element) n;
 
-					String datum = e.getElementsByTagName("datum").item(0)
+					Datum = e.getElementsByTagName("datum").item(0)
 							.getTextContent();
-					String Temperatuur = e.getElementsByTagName("temperatuurGC").item(0)
+					Temperatuur = e.getElementsByTagName("temperatuurGC").item(0)
 							.getTextContent();
-					String Windsnelheid = e.getElementsByTagName("windsnelheidMS").item(0)
+					Windsnelheid = e.getElementsByTagName("windsnelheidMS").item(0)
 							.getTextContent();
 							
-					String Windrichting = e.getElementsByTagName("windrichting").item(0)
+					Windrichting = e.getElementsByTagName("windrichting").item(0)
 							.getTextContent();
 					
-					String Luchtvochtigheid = e.getElementsByTagName("luchtvochtigheid").item(0)
+					Luchtvochtigheid = e.getElementsByTagName("luchtvochtigheid").item(0)
 							.getTextContent();
 					
-					String Regen = e.getElementsByTagName("regenMMPU").item(0)
+					Regen = e.getElementsByTagName("regenMMPU").item(0)
 							.getTextContent();
-					
-					Object[][] data = {{datum, Temperatuur, Windsnelheid, Windrichting, Luchtvochtigheid, Regen}};
-					table = new JTable(data, columnNames);
+		
+		
+					String plaatje = e.getElementsByTagName("icoonactueel").item(0)
+							.getTextContent();
+					URL imageURL = new URL(plaatje);
+				    img = ImageIO.read(imageURL);
+				    
 			}
 
 		} catch (Exception e) {
@@ -82,11 +112,29 @@ public class ParseXMLDOM {
 		
 	}
 	
-	public JTable getTable() {
-		return table;
+	public BufferedImage getImage(){
+		return img;
 	}
 	
-
+	public String Windsnelheid(){
+		return Windsnelheid;
+	}
+	
+	public String regen(){
+		return Regen;
+	}
+	
+	public String Datum(){
+		return Datum;
+	}
+	
+	public String Temperatuur(){
+		return Temperatuur;
+	}
+	
+	public String Windrichting(){
+		return Windrichting;
+	}
 	
 	public String[] getName() {
 		return this.name;
