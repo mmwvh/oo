@@ -29,7 +29,7 @@ public class Button implements ActionListener{
 	}
 
 	public JButton getButton() {
-		return this.b;
+		return this.b;//
 	}
 
 	@Override
