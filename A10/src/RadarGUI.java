@@ -1,6 +1,3 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.JFrame;
 
 /**
@@ -17,17 +14,14 @@ import javax.swing.JFrame;
 public class RadarGUI extends JFrame {
 
 	public static final int WIDTH = 500;
-	public static final int HEIGHT = 700;
+	public static final int HEIGHT = 300;
+
 	public RadarGUI() {
 
 		setSize(WIDTH, HEIGHT);
 		setTitle("Buienradar App");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 	}
-	
-	
-	
-	
 
 }
