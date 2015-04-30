@@ -16,7 +16,7 @@ public class GridFiller {
 	private double xmax = 2.5;
 	private double ymax = 2.5;
 	private double ymin = -2.5;
-	private double s = 0;
+	private double s = 100;
 
 	/**
 	 * The constructor
@@ -52,12 +52,17 @@ public class GridFiller {
 	}
 	
 	public void mousePressed(double x, double y){
+		x = x/this.s*2;
+		y = y/this.s*2;
+		
+		
 		setScale(x,y,this.s*2);
+		System.out.println(" x: " + x + " y " + y + " s " + this.s );
 	}
 
 	public void setScale(double x, double y, double scale){
 		this.s = scale;
-		System.out.println(grid.getHeight());
+		//System.out.println(grid.getHeight());
 		
 		double verschily = (grid.getHeight()/scale)/2; 
 		double verschilx = (grid.getWidth()/scale)/2;

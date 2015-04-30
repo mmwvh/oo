@@ -18,10 +18,11 @@ public class MainWindow  {
     
     // The grip panel
     private GridView grid;
-    
+    private GridFiller gf;
+    private MouseHandler mh;
+    JFrame mainFrame;
     public MainWindow () {
-    	JFrame mainFrame = new JFrame ("Mandelbrot");
-        
+    	mainFrame = new JFrame ("Mandelbrot");
     	mainFrame.setSize (WIDTH, HEIGHT);                
     	mainFrame.setLocationRelativeTo(null);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,8 +31,6 @@ public class MainWindow  {
     	
         Insets insets = mainFrame.getInsets ();
         grid = new GridView (WIDTH - insets.left - insets.right, HEIGHT - insets.top - insets.bottom);
-        MouseHandler mh = new MouseHandler();
-        mainFrame.addMouseListener(mh);
         mainFrame.add(grid);
         mainFrame.pack();
     }
@@ -42,6 +41,12 @@ public class MainWindow  {
      */
     public Grid getGrid () {
     	return grid;
+    }
+
+    public void setFiller(GridFiller gf){
+    	this.gf = gf;
+    	 MouseHandler mh = new MouseHandler(gf);
+         mainFrame.addMouseListener(mh);
     }
     
 }
