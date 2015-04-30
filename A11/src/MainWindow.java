@@ -30,7 +30,8 @@ public class MainWindow  {
     	
         Insets insets = mainFrame.getInsets ();
         grid = new GridView (WIDTH - insets.left - insets.right, HEIGHT - insets.top - insets.bottom);
-        
+        MouseHandler mh = new MouseHandler();
+        mainFrame.addMouseListener(mh);
         mainFrame.add(grid);
         mainFrame.pack();
     }

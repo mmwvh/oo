@@ -12,6 +12,11 @@ public class GridFiller {
 	private Grid grid; // the grid to be filled
 	private ColorTable colorTable; // a table for converting indexes to
 									// rgb values
+	private double xmin = -2.5;
+	private double xmax = 2.5;
+	private double ymax = 2.5;
+	private double ymin = -2.5;
+	private double s = 0;
 
 	/**
 	 * The constructor
@@ -33,30 +38,60 @@ public class GridFiller {
 		int grid_w = grid.getWidth(), grid_h = grid.getHeight();
 		for (int i = 0; i < grid_w; i++) {
 			for (int j = 0; j < grid_h; j++) {
-				int m = mandelvalue(i, j);
-				if (m % 2 == 0 || m == 100) {
-					grid.setPixel(i, j, colorTable.BLACK);
+
+				double newj = scale(grid.getHeight(), j, ymin, ymax) - ymax;
+				double newi = scale(grid.getWidth(), i, xmin, xmax) - xmax;
+				int m = mandelvalue(newi, newj);
+				if (m % 2 == 0 || m == Integer.MAX_VALUE) {
+					grid.setPixel(i, j, ColorTable.BLACK);
+				} else {
+					grid.setPixel(i, j, ColorTable.WHITE);
 				}
-				else {
-					grid.setPixel(i, j, colorTable.getColor(10));
-				}
-				//int color_index = i / 5 * grid_w / 5 + j / 5;
-				//grid.setPixel(i, j, colorTable.getColor(color_index));
 			}
 		}
 	}
+	
+	public void mousePressed(double x, double y){
+		setScale(x,y,this.s*2);
+	}
 
-	private int mandelvalue(int a, int b) {
+	public void setScale(double x, double y, double scale){
+		this.s = scale;
+		System.out.println(grid.getHeight());
+		
+		double verschily = (grid.getHeight()/scale)/2; 
+		double verschilx = (grid.getWidth()/scale)/2;
+		
+		
+		this.setXmax(x+verschilx);
+		this.setXmin(x-verschilx);
+		this.setYmax(y+verschily);
+		this.setYmin(y-verschily);
+		fill();
+		
+	}
+	
+	
+	private double scale(double width, double i, double min, double max) {
+		double newi = 0;
+		double scale = i / width;
+		newi = (max - min) * scale;
+		return newi;
+	}
 
+	private int mandelvalue(double a, double b) {
+		if (Math.sqrt(a * a + b * b) > 2.0) {
+			return 0;
+		}
 		int n = 0;
 
-		double m = 0;
 		double xn = 0;
 		double yn = 0;
-		double x = (double) a;
-		double y = (double) b;
+		double x = a;
+		double y = b;
 
-		while (n < 100 && m < 2.0) {
+		while (n < 100) {
+
 			n++;
 
 			xn = Math.pow(x, 2) - Math.pow(y, 2) + a;
@@ -65,10 +100,28 @@ public class GridFiller {
 			x = xn;
 			y = yn;
 
-			m = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+			if (Math.sqrt(x*x + y*y) > 2.0) {
+				return n;
+			}
 
 		}
 
-		return n;
+		return Integer.MAX_VALUE;
+	}
+	
+	public void setXmin(double newxmin){
+		xmin = newxmin;
+	}
+	
+	public void setXmax(double newxmax){
+		xmax = newxmax;
+	}
+	
+	public void setYmin(double newymin){
+		ymin = newymin;
+	}
+	
+	public void setYmax(double newymax){
+		ymax = newymax;
 	}
 }
