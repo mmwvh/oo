@@ -16,6 +16,7 @@ public class GridFiller {
 	private double xmid = 0;
 	private double ymid = 0;
 	private double s = 100;
+	private ScaleWindow sw;
 
 	/**
 	 * The constructor
@@ -41,9 +42,15 @@ public class GridFiller {
 				double newj = scale(j, grid_h, -ymid);
 				double newi = scale(i, grid_w, xmid);
 				int m = mandelvalue(newi, newj);
-				if (m % 2 == 0 || m == Integer.MAX_VALUE) {
+				if (m % 2 == 0) {
 					grid.setPixel(i, j, ColorTable.BLACK);
-				} else {
+				} else if (m % 3 == 0){
+					grid.setPixel(i, j, colorTable.getColor(10));
+				}else if (m % 5 == 0){
+						grid.setPixel(i, j, colorTable.getColor(5));
+				}else if (m == Integer.MAX_VALUE){
+					grid.setPixel(i, j, colorTable.getColor(2));
+				}else {
 					grid.setPixel(i, j, ColorTable.WHITE);
 				}
 			}
@@ -51,14 +58,15 @@ public class GridFiller {
 	}
 
 	public void mousePressed(double x, double y, boolean zoom) {
-		x = scale(x, grid.getWidth(), this.xmid);
-		y = scale(y, grid.getHeight(), -this.ymid);
-
+		double x1 = scale(x, grid.getWidth(), this.xmid);
+		double y1 = scale(y, grid.getHeight(), -this.ymid);
 		if(zoom) {
-			setScale(x, y, this.s * 2);
+			setScale(x1, y1, this.s * 2);
+			sw.setTextFields(x,y,this.s*2);
 		}
 		else {
-			setScale(x, y, this.s / 2);
+			setScale(x1, y1, this.s/2);
+			sw.setTextFields(x,y,this.s/2);
 		}
 		
 		
@@ -71,6 +79,7 @@ public class GridFiller {
 		fill();
 
 	}
+	
 
 	private double scale(double x, double w, double mid) {
 
@@ -107,6 +116,10 @@ public class GridFiller {
 		}
 
 		return Integer.MAX_VALUE;
+	}
+	
+	public void setScaleWindow(ScaleWindow sw){
+		this.sw = sw;
 	}
 	
 	

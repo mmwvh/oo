@@ -20,7 +20,7 @@ public class ColorTable {
 
     public static final int[] BLACK = {0, 0, 0};
     public static final int[] WHITE = {255, 255, 255};
-
+    
     /**
      * converts specified color to an rgb array
      *

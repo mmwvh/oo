@@ -1,6 +1,9 @@
+import java.awt.BorderLayout;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * 
@@ -21,6 +24,7 @@ public class MainWindow  {
     private GridFiller gf;
     private MouseHandler mh;
     JFrame mainFrame;
+	
     public MainWindow () {
     	mainFrame = new JFrame ("Mandelbrot");
     	mainFrame.setSize (WIDTH, HEIGHT);                
@@ -28,11 +32,11 @@ public class MainWindow  {
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	mainFrame.setResizable(false);
     	mainFrame.setVisible(true);
-    	
         Insets insets = mainFrame.getInsets ();
         grid = new GridView (WIDTH - insets.left - insets.right, HEIGHT - insets.top - insets.bottom);
         mainFrame.add(grid);
         mainFrame.pack();
+        
     }
     
     /**

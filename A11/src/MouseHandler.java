@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,6 +13,7 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 	private GridFiller gf;
 	private int x = 0;
 	private int y = 0;
+	private Rectangle field;
 
 	public MouseHandler(GridFiller gf) {
 		this.gf = gf;
@@ -30,16 +32,15 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		
         int nx = e.getX();
         int ny = e.getY();
-        
-        System.out.println("lalla");
-        
         Graphics graph = e.getComponent().getGraphics();
-        System.out.println(graph);
-        graph.setXORMode(Color.GREEN);
-        graph.drawRect(x, y, x+nx, y+ny);
+        graph.clearRect(x, y, nx - x, ny - y);
+        //graph.setXORMode(Color.GREEN);
+        graph.drawRect(x, y, nx - x, ny - y);
         repaint();
+        graph.drawRect(x, y, nx - x, ny - y);
 	}
 
 	@Override
@@ -50,13 +51,13 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 	public void mousePressed(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		System.out.println("2");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		double newx = e.getX();
 		double newy = e.getY();
+		gf.mousePressed((x+newx)/2, (y+newy)/2, true);
 	}
 
 	@Override
@@ -65,5 +66,6 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-	}	
+	}
+	
 }

@@ -63,7 +63,11 @@ public class ScaleWindow implements ActionListener  {
 
 	}
 	
-	
+	public void setTextFields(double x, double y, double scale){
+		scalefactor.setText(Double.toString(scale));
+		ycenter.setText(Double.toString(y));
+		xcenter.setText(Double.toString(x));
+	}
 	
 	
 
