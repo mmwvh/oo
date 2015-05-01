@@ -62,5 +62,9 @@ public class ScaleWindow implements ActionListener  {
 		gf.setScale(x, y, sf);
 
 	}
+	
+	
+	
+	
 
 }

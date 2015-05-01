@@ -46,7 +46,8 @@ public class MainWindow  {
     public void setFiller(GridFiller gf){
     	this.gf = gf;
     	 MouseHandler mh = new MouseHandler(gf);
-         mainFrame.addMouseListener(mh);
+         grid.addMouseListener(mh);
+         grid.addMouseMotionListener(mh);
     }
     
 }

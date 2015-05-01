@@ -12,10 +12,9 @@ public class GridFiller {
 	private Grid grid; // the grid to be filled
 	private ColorTable colorTable; // a table for converting indexes to
 									// rgb values
-	private double xmin = -2.5;
-	private double xmax = 2.5;
-	private double ymax = 2.5;
-	private double ymin = -2.5;
+
+	private double xmid = 0;
+	private double ymid = 0;
 	private double s = 100;
 
 	/**
@@ -39,8 +38,8 @@ public class GridFiller {
 		for (int i = 0; i < grid_w; i++) {
 			for (int j = 0; j < grid_h; j++) {
 
-				double newj = scale(grid.getHeight(), j, ymin, ymax) - ymax;
-				double newi = scale(grid.getWidth(), i, xmin, xmax) - xmax;
+				double newj = scale(j, grid_h, -ymid);
+				double newi = scale(i, grid_w, xmid);
 				int m = mandelvalue(newi, newj);
 				if (m % 2 == 0 || m == Integer.MAX_VALUE) {
 					grid.setPixel(i, j, ColorTable.BLACK);
@@ -50,38 +49,34 @@ public class GridFiller {
 			}
 		}
 	}
-	
-	public void mousePressed(double x, double y){
-		x = x/this.s*2;
-		y = y/this.s*2;
+
+	public void mousePressed(double x, double y, boolean zoom) {
+		x = scale(x, grid.getWidth(), this.xmid);
+		y = scale(y, grid.getHeight(), -this.ymid);
+
+		if(zoom) {
+			setScale(x, y, this.s * 2);
+		}
+		else {
+			setScale(x, y, this.s / 2);
+		}
 		
 		
-		setScale(x,y,this.s*2);
-		System.out.println(" x: " + x + " y " + y + " s " + this.s );
 	}
 
-	public void setScale(double x, double y, double scale){
+	public void setScale(double x, double y, double scale) {
 		this.s = scale;
-		//System.out.println(grid.getHeight());
-		
-		double verschily = (grid.getHeight()/scale)/2; 
-		double verschilx = (grid.getWidth()/scale)/2;
-		
-		
-		this.setXmax(x+verschilx);
-		this.setXmin(x-verschilx);
-		this.setYmax(y+verschily);
-		this.setYmin(y-verschily);
+		this.xmid = x;
+		this.ymid = -y;
 		fill();
-		
+
 	}
-	
-	
-	private double scale(double width, double i, double min, double max) {
-		double newi = 0;
-		double scale = i / width;
-		newi = (max - min) * scale;
-		return newi;
+
+	private double scale(double x, double w, double mid) {
+
+		x = (x - 0.5 * w) / this.s + mid;
+
+		return x;
 	}
 
 	private int mandelvalue(double a, double b) {
@@ -105,7 +100,7 @@ public class GridFiller {
 			x = xn;
 			y = yn;
 
-			if (Math.sqrt(x*x + y*y) > 2.0) {
+			if (Math.sqrt(x * x + y * y) > 2.0) {
 				return n;
 			}
 
@@ -114,19 +109,5 @@ public class GridFiller {
 		return Integer.MAX_VALUE;
 	}
 	
-	public void setXmin(double newxmin){
-		xmin = newxmin;
-	}
 	
-	public void setXmax(double newxmax){
-		xmax = newxmax;
-	}
-	
-	public void setYmin(double newymin){
-		ymin = newymin;
-	}
-	
-	public void setYmax(double newymax){
-		ymax = newymax;
-	}
 }
