@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -8,7 +7,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class MouseHandler extends JPanel implements MouseListener, MouseMotionListener {
+public class MouseHandler extends JPanel implements MouseListener,
+		MouseMotionListener {
 
 	private GridFiller gf;
 	private int x = 0;
@@ -32,15 +32,15 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
-        int nx = e.getX();
-        int ny = e.getY();
-        Graphics graph = e.getComponent().getGraphics();
-        graph.clearRect(x, y, nx - x, ny - y);
-        //graph.setXORMode(Color.GREEN);
-        graph.drawRect(x, y, nx - x, ny - y);
-        repaint();
-        graph.drawRect(x, y, nx - x, ny - y);
+
+		int nx = e.getX();
+		int ny = e.getY();
+		Graphics graph = e.getComponent().getGraphics();
+		graph.clearRect(x, y, nx - x, ny - y);
+		// graph.setXORMode(Color.GREEN);
+		graph.drawRect(x, y, nx - x, ny - y);
+		repaint();
+		graph.drawRect(x, y, nx - x, ny - y);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 	public void mouseReleased(MouseEvent e) {
 		double newx = e.getX();
 		double newy = e.getY();
-		gf.mousePressed((x+newx)/2, (y+newy)/2, true);
+		gf.mousePressed((x + newx) / 2, (y + newy) / 2, true);
 	}
 
 	@Override
@@ -67,5 +67,5 @@ public class MouseHandler extends JPanel implements MouseListener, MouseMotionLi
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
-	
+
 }

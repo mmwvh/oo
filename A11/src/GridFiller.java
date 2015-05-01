@@ -42,34 +42,35 @@ public class GridFiller {
 				double newj = scale(j, grid_h, -ymid);
 				double newi = scale(i, grid_w, xmid);
 				int m = mandelvalue(newi, newj);
-				if (m % 2 == 0) {
-					grid.setPixel(i, j, ColorTable.BLACK);
-				} else if (m % 3 == 0){
-					grid.setPixel(i, j, colorTable.getColor(10));
-				}else if (m % 5 == 0){
-						grid.setPixel(i, j, colorTable.getColor(5));
-				}else if (m == Integer.MAX_VALUE){
+				grid.setPixel(i, j, colorTable.getColor(m));
+				/*if (m % 2 == 0) {
 					grid.setPixel(i, j, colorTable.getColor(2));
-				}else {
-					grid.setPixel(i, j, ColorTable.WHITE);
-				}
+				} else if (m % 3 == 0) {
+					grid.setPixel(i, j, colorTable.getColor(3));
+				} else if (m % 5 == 0) {
+					grid.setPixel(i, j, colorTable.getColor(5));
+				} else if (m % 7 == 0) {
+					grid.setPixel(i, j, colorTable.getColor(7));
+				} else if (m == Integer.MAX_VALUE) {
+					grid.setPixel(i, j, colorTable.getColor(1));
+				} else {
+					grid.setPixel(i, j, colorTable.getColor(0));
+				}*/
 			}
 		}
 	}
 
 	public void mousePressed(double x, double y, boolean zoom) {
-		double x1 = scale(x, grid.getWidth(), this.xmid);
-		double y1 = scale(y, grid.getHeight(), -this.ymid);
-		if(zoom) {
-			setScale(x1, y1, this.s * 2);
-			sw.setTextFields(x,y,this.s*2);
+		x = scale(x, grid.getWidth(), this.xmid);
+		y = scale(y, grid.getHeight(), -this.ymid);
+		if (zoom) {
+			setScale(x, y, this.s * 2);
+			sw.setTextFields(x, y, this.s);
+		} else {
+			setScale(x, y, this.s / 4);
+			sw.setTextFields(x, y, this.s);
 		}
-		else {
-			setScale(x1, y1, this.s/2);
-			sw.setTextFields(x,y,this.s/2);
-		}
-		
-		
+
 	}
 
 	public void setScale(double x, double y, double scale) {
@@ -79,7 +80,6 @@ public class GridFiller {
 		fill();
 
 	}
-	
 
 	private double scale(double x, double w, double mid) {
 
@@ -117,10 +117,9 @@ public class GridFiller {
 
 		return Integer.MAX_VALUE;
 	}
-	
-	public void setScaleWindow(ScaleWindow sw){
+
+	public void setScaleWindow(ScaleWindow sw) {
 		this.sw = sw;
 	}
-	
-	
+
 }
