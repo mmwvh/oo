@@ -6,9 +6,11 @@
 public class Mandelbrot 
 {
     public static void main(String args[]) {    	       
-        MainWindow fractal_win = new MainWindow ();
-   
+      
+    	
+    	MainWindow fractal_win = new MainWindow();
         GridFiller filler = new GridFiller (fractal_win.getGrid());
+        fractal_win.setFiller(filler);
         ScaleWindow scale_win = new ScaleWindow(filler);
         filler.fill();
     }
