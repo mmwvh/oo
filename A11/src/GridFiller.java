@@ -1,5 +1,10 @@
 /**
  *
+ * Object Orientation Artificial Intelligence
+ * 
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
+ *
  * @author Sjaak Smetsers
  ** @version 1.0, 13-03-2013
  */
@@ -31,7 +36,7 @@ public class GridFiller {
 	}
 
 	/**
-	 * fills the whole grid with some arbitrarily chosen color
+	 * fills the whole grid with a chosen color dependant of the mandelvalue
 	 * 
 	 */
 	public void fill() {
@@ -43,23 +48,20 @@ public class GridFiller {
 				double newi = scale(i, grid_w, xmid);
 				int m = mandelvalue(newi, newj);
 				grid.setPixel(i, j, colorTable.getColor(m));
-				/*if (m % 2 == 0) {
-					grid.setPixel(i, j, colorTable.getColor(2));
-				} else if (m % 3 == 0) {
-					grid.setPixel(i, j, colorTable.getColor(3));
-				} else if (m % 5 == 0) {
-					grid.setPixel(i, j, colorTable.getColor(5));
-				} else if (m % 7 == 0) {
-					grid.setPixel(i, j, colorTable.getColor(7));
-				} else if (m == Integer.MAX_VALUE) {
-					grid.setPixel(i, j, colorTable.getColor(1));
-				} else {
-					grid.setPixel(i, j, colorTable.getColor(0));
-				}*/
 			}
 		}
 	}
 
+	/**
+	 * On mouse pressed, scale to new level.
+	 * 
+	 * @param x
+	 *            axis mouse coordinate
+	 * @param y
+	 *            axis mouse coordinate
+	 * @param zoom
+	 *            bool in or out
+	 */
 	public void mousePressed(double x, double y, boolean zoom) {
 		x = scale(x, grid.getWidth(), this.xmid);
 		y = scale(y, grid.getHeight(), -this.ymid);
@@ -67,27 +69,50 @@ public class GridFiller {
 			setScale(x, y, this.s * 2);
 			sw.setTextFields(x, y, this.s);
 		} else {
-			setScale(x, y, this.s / 4);
+			setScale(x, y, this.s / 2);
 			sw.setTextFields(x, y, this.s);
 		}
 
 	}
 
+	/**
+	 * sets new center with the corresponding scale
+	 * 
+	 * @param x
+	 *            axis of mouse coordinate
+	 * @param y
+	 *            axis of mouse coordinate
+	 * @param scale
+	 */
 	public void setScale(double x, double y, double scale) {
 		this.s = scale;
 		this.xmid = x;
 		this.ymid = -y;
 		fill();
-
 	}
 
+	/**
+	 * calculate scale
+	 * 
+	 * @param x axis parameter 
+	 * @param w length parameter
+	 * @param mid center coordinate parameter
+	 * @return
+	 */
 	private double scale(double x, double w, double mid) {
 
-		x = (x - 0.5 * w) / this.s + mid;
+		x = (x - (0.5 * w)) / this.s + mid;
 
 		return x;
 	}
 
+	/**
+	 * calculate Mandelvalue
+	 * 
+	 * @param a
+	 * @param b
+	 * @return mandelvalue
+	 */
 	private int mandelvalue(double a, double b) {
 		if (Math.sqrt(a * a + b * b) > 2.0) {
 			return 0;

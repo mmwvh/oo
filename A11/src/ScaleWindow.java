@@ -1,3 +1,10 @@
+/**
+ * Object Orientation Artificial Intelligence
+ * 
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -8,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ScaleWindow implements ActionListener  {
+public class ScaleWindow implements ActionListener {
 	public static final int WIDTH = 200, HEIGHT = 120;
 	private JTextField scalefactor;
 	private JTextField xcenter;
@@ -53,6 +60,9 @@ public class ScaleWindow implements ActionListener  {
 
 	}
 
+	/**
+	 * ActionListener for the apply button
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		double sf = Double.parseDouble(scalefactor.getText());
@@ -62,13 +72,18 @@ public class ScaleWindow implements ActionListener  {
 		gf.setScale(x, y, sf);
 
 	}
-	
-	public void setTextFields(double x, double y, double scale){
+
+	/**
+	 * Set settings on a mouse click in the textfield
+	 * 
+	 * @param x
+	 * @param y
+	 * @param scale
+	 */
+	public void setTextFields(double x, double y, double scale) {
 		scalefactor.setText(Double.toString(scale));
 		ycenter.setText(Double.toString(y));
 		xcenter.setText(Double.toString(x));
 	}
-	
-	
 
 }
