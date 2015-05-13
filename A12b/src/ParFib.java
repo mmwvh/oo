@@ -10,7 +10,7 @@
 public class ParFib implements Runnable {
 
 	private int n;
-	private int answer;
+	private long answer;
 
 	public ParFib(int n) {
 		this.n = n;
@@ -45,7 +45,7 @@ public class ParFib implements Runnable {
 		Fib();
 	}
 
-	public int getAnswer() {
+	public long getAnswer() {
 		return answer;
 	}
 
