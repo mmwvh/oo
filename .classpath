@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="A2/src/|A3/src/|A8/src/|A7/src/|A11/src/|A9/src/|A1/src/|A4/src/|A6/src/|A5/src/|A10/src/" kind="src" path=""/>
+	<classpathentry kind="src" path="A1/src"/>
+	<classpathentry kind="src" path="A10/src"/>
+	<classpathentry kind="src" path="A11/src"/>
+	<classpathentry kind="src" path="A2/src"/>
+	<classpathentry kind="src" path="A3/src"/>
+	<classpathentry kind="src" path="A4/src"/>
+	<classpathentry kind="src" path="A5/src"/>
+	<classpathentry kind="src" path="A6/src"/>
+	<classpathentry kind="src" path="A7/src"/>
+	<classpathentry kind="src" path="A8/src"/>
+	<classpathentry kind="src" path="A9/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="A9/bin"/>
+</classpath>
