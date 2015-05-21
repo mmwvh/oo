@@ -34,7 +34,7 @@ public class FileFinder implements Runnable {
 	 *            String
 	 * @throws IOException
 	 */
-	private void find(File rootDir, String fileName) throws IOException {
+	private synchronized void find(File rootDir, String fileName) throws IOException {
 		File[] files = rootDir.listFiles();
 		if (files != null) {
 			for (File file : files) {
