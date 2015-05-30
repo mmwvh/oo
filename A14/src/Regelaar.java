@@ -6,76 +6,68 @@
 
 /**
  *
- * @author pieterkoopman
+ * Object Orientation Artificial Intelligence
+ * 
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
+ * 
  */
 public class Regelaar {
-	private Object noordZuid = new Object();
-	private Object ossWest = new Object();
-	private int crossNZ = 0;
-	private int crossEW = 0;
-	private int crossedNZ = 0;
-	private int crossedEW = 0;
+
 	private boolean vrijNZ = true;
 	private boolean vrijEW = true;
+
+	private int crossed = 0;
 
 	public Regelaar() {
 
 	}
 
-	public void cross(Direction d) {
+	/*
+	 * Disable the other directions
+	 */
+	public boolean enterCross(Direction d) {
 		if (d == Direction.North || d == Direction.South) {
-			crossNZ += 1;
-			System.out.println("NZ " + crossNZ);
-			if (vrijEW || crossedNZ > 5) {
-				crossedNZ = 0;
-				vrijNZ = false;
-				try {
-					synchronized (noordZuid) {
-						noordZuid.wait();
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 
-		} else if (d == Direction.East || d == Direction.West) {
-			crossEW += 1;
-			System.out.println("EW " + crossEW);
-			if (vrijNZ || crossedEW > 5) {
-				crossedEW = 0;
-				vrijEW = false;
-				try {
-					synchronized (ossWest) {
-						ossWest.wait();
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if (vrijEW) {
+				vrijNZ = false;
+				return true;
 			}
+			return false;
 		}
 
+		else if (d == Direction.East || d == Direction.West) {
+
+			if (vrijNZ) {
+				vrijEW = false;
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
-	public void leave(Direction d) {
-		if (d == Direction.North || d == Direction.South) {
-			crossNZ -= 1;
-			crossedNZ += 1;
-			
-			vrijNZ = true;
-			vrijEW = false;
-			
-			synchronized (ossWest) {
-				ossWest.notifyAll();
-			}
-		}
-		if (d == Direction.West || d == Direction.East) {
-			crossEW -= 1;
-			crossedEW += 1;
+	/*
+	 * Switch lanes after some cars left the intersection
+	 */
+	public boolean leftCross(Direction d) {
+		crossed += 1;
+		if (crossed > 5) {
+			if (d == Direction.North || d == Direction.South) {
 
-			synchronized (noordZuid) {
-				noordZuid.notifyAll();
+				vrijNZ = true;
+				vrijEW = false;
+				System.out.println("NZ " + crossed + " vrij " + vrijNZ);
 			}
-		}
+			else if (d == Direction.West || d == Direction.East) {
 
+				vrijEW = true;
+				vrijNZ = false;
+				System.out.println("EW " + crossed + " vrij " + vrijEW);
+			}
+			crossed = 0;
+			return false;
+		}
+		return true;
 	}
 }

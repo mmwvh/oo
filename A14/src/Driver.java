@@ -1,12 +1,12 @@
 import java.util.Random;
 
 /**
- * 
- */
-
-/**
- * @author mmwvh
  *
+ * Object Orientation Artificial Intelligence
+ * 
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
+ * 
  */
 public class Driver implements Runnable {
 	private final Random random; // a random generator
@@ -44,28 +44,14 @@ public class Driver implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			// pause();
-			//
-			// if !Controller.run
-			//	continue
-			// 
-			// if !canStep()
-			// 	otherCar.wait()
-			//	continue
-			//
-			// if staatVoorKruising
-			//	regelaar.cross(car.dir)
-			// elif verlaatKruising
-			//	regelaar.leave
-			//
-			// step()
-			// updateView()
-			// notifyAll()
+
 			pause();
+			// Allowed to run
 			if (!Controller.run) {
 				continue;
 			}
-			
+
+			// Cars keep their distance
 			if (!distance()) {
 				try {
 					synchronized (carif) {
@@ -76,19 +62,35 @@ public class Driver implements Runnable {
 				}
 				continue;
 			}
-			
-			if (car.getLocation() < RoadView.WINDOWSIZE * 0.5 - 32 &&
-					car.getLocation() + car.getSpeed() >= RoadView.WINDOWSIZE * 0.5 - 32) {
-				regelaar.cross(car.getDirection());
-			} else if (car.getLocation() < RoadView.WINDOWSIZE * 0.5 + 32 + Car.CARLENGTH &&
-					car.getLocation() + car.getSpeed() > RoadView.WINDOWSIZE * 0.5 + 32 + Car.CARLENGTH) {
-				regelaar.leave(car.getDirection());
+
+			// Wait when the intersection is unsafe
+			if (car.getLocation() < RoadView.WINDOWSIZE * 0.5 - 32
+					&& car.getLocation() + car.getSpeed() >= RoadView.WINDOWSIZE * 0.5 - 32) {
+				if (!regelaar.enterCross(car.getDirection())) {
+					try {
+						synchronized (car) {
+							car.wait();
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			} // Notify when the intersection is safe again
+			else if (car.getLocation() < RoadView.WINDOWSIZE * 0.5 + 32
+					+ Car.CARLENGTH
+					&& car.getLocation() + car.getSpeed() > RoadView.WINDOWSIZE
+							* 0.5 + 32 + Car.CARLENGTH) {
+				if (regelaar.leftCross(car.getDirection())) {
+					synchronized (car) {
+						car.notifyAll();
+					}
+				}
 			}
-			
+
 			car.step();
 			model.update();
 			synchronized (car) {
-				car.notify();
+				car.notifyAll();
 			}
 		}
 

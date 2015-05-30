@@ -6,7 +6,13 @@ import java.util.concurrent.Executors;
 import javax.swing.JFrame;
 
 /**
- * OO1route66 initial class
+ *
+ * Object Orientation Artificial Intelligence
+ * 
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
+ * 
+ *         OO1route66 initial class
  * 
  * @author Pieter Koopman
  *
@@ -30,20 +36,23 @@ public class Model extends Observable {
 		views = new ArrayList<JFrame>();
 		cars = new Car[NUMBEROFCARS];
 		drivers = new Driver[NUMBEROFCARS];
-		
 
 		for (int c = 0; c < NUMBEROFCARS; c += 1) {
 			cars[c] = new Car(c);
 		}
-		
+
 		regelaar = new Regelaar();
 	}
 
+	/*
+	 * Create a threadpool of drivers with cars
+	 */
 	public void ExecutiveProducer() {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		for (int i = 0; i < NUMBEROFCARS; i += 1) {
 			drivers[i] = new Driver(cars[i],
-					cars[(i - DIRECTIONS + NUMBEROFCARS) % NUMBEROFCARS], this, regelaar);
+					cars[(i - DIRECTIONS + NUMBEROFCARS) % NUMBEROFCARS], this,
+					regelaar);
 			executor.execute(drivers[i]);
 		}
 	}
