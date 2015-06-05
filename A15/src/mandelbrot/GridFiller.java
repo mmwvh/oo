@@ -23,14 +23,22 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 	private static final ColorChooser colorChooser = new ColorChooser();
 	private int progress;
 	private JProgressBar pb;
+	int startx;
+	int starty;
+	int endx;
+	int endy;
 
-	public GridFiller(Grid grid, Area area, JProgressBar pb) {
+	public GridFiller(Grid grid, Area area, JProgressBar pb, int startx, int starty, int endx, int endy) {
 		progress = 0;
 		this.pb = pb;
 		pb.setValue(progress);
 		
 		this.grid = grid;
 		this.area = area;
+		this.startx = startx;
+		this.starty = starty;
+		this.endx = endx;
+		this.endy = endy;
 	}
 
 	public Area getArea() {
@@ -43,13 +51,18 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 		double area_w = area.getWidth(), area_h = area.getHeight();
 		double dx = area_w / grid_w, dy = area_h / grid_h;
 
+		
 		List<ColorPoint> cpl = new ArrayList<ColorPoint>();
 
 		double x = area.getX();
-		for (int i = 0; i < grid_w; i++) {
+		for (int i = startx; i < endx; i++) {
 			double y = area.getY();
-			for (int j = 0; j < grid_h; j++) {
+			for (int j = starty; j < endy; j++) {
+
 				int color = colorChooser.getColorIndex(x, y);
+
+				//System.out.printf("gx: %d, gy: %d, ax: %f, ay: %f, c: %d\n", i, j, x, y, color);
+				
 				int[] rgb = color == -1 ? RGBColors.BLACK : rgbColors
 						.getColor(color);
 
@@ -77,7 +90,7 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 	}
 	
 	@Override
-	protected Object doInBackground() throws Exception {
+	protected Object doInBackground() {
 		int stepSize = 20;
 		
 		for (int c = 1; c < MAX_ITERATIONS; c += stepSize) {
