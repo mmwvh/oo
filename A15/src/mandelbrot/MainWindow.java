@@ -5,12 +5,14 @@ package mandelbrot;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
-
-/**
- * 
- * @author Sjaak Smetsers
- * @version 1.0, 14-03-2013
+ 
+ /**
+ *
+ * @author Sjaak
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
  */
+
 
 /**
  * creates a window to which a GridView panel is added

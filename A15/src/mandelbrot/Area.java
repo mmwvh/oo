@@ -3,6 +3,8 @@ package mandelbrot;
 /**
  *
  * @author Sjaak
+ * @author Franka Buytenhuijs / s4356845
+ * @author Wesley van Hoorn / s4018044
  */
 public class Area {
     private final double startX, startY, width, height;

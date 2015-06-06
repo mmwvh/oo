@@ -3,7 +3,12 @@
  * and open the template in the editor.
  */
 package mandelbrot;
-
+/**
+*
+* @author Sjaak
+* @author Franka Buytenhuijs / s4356845
+* @author Wesley van Hoorn / s4018044
+*/
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.JFrame;
@@ -16,7 +21,10 @@ import javax.swing.JProgressBar;
  on the surface of the figure. The user can also select from a set of color
  schemes.
  */
-
+/**
+ * Divides the grid into 4 grids. Each with an own SwingWorker
+ *
+ */
 public class Mandelbrot {
 	public static void main(String args[]) {
 	

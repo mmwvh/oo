@@ -9,9 +9,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputAdapter;
 
 /**
- *
- * @author Sjaak
- */
+*
+* @author Sjaak
+* @author Franka Buytenhuijs / s4356845
+* @author Wesley van Hoorn / s4018044
+*/
 public class AreaSelector extends MouseInputAdapter {
 
     private Component component;

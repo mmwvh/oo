@@ -5,9 +5,11 @@
 package mandelbrot;
 
 /**
- *
- * @author Sjaak
- */
+*
+* @author Sjaak
+* @author Franka Buytenhuijs / s4356845
+* @author Wesley van Hoorn / s4018044
+*/
 public class RGBColors {
     
     private int [][] rgbColors;

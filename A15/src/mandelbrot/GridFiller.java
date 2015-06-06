@@ -11,9 +11,11 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
 /**
- *
- * @author Sjaak
- */
+*
+* @author Sjaak
+* @author Franka Buytenhuijs / s4356845
+* @author Wesley van Hoorn / s4018044
+*/
 public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 
 	private Area area;
@@ -45,6 +47,10 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 		return area;
 	}
 
+	/**
+	 * calculates the color for the x and y value in the grid
+	 * @return a list of colorpoints (x and y value with coresponding color)
+	 */
 	public List<ColorPoint> fill() {
 
 		int grid_w = grid.getWidth(), grid_h = grid.getHeight();
@@ -75,6 +81,9 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 		return cpl;
 	}
 
+	/**
+	 * sets the pixel in the grid with the right color from the colorpoint list
+	 */
 	@Override
 	protected void process(List<List<ColorPoint>> publishedVals) {
 
@@ -89,6 +98,9 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 		pb.setValue(progress);
 	}
 	
+	/**
+	 * fills the grid, and goes a few steps deeper each stepsize
+	 */
 	@Override
 	protected Object doInBackground() {
 		int stepSize = 20;

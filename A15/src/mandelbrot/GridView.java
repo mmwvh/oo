@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 /**
- *
- * @author Sjaak
- */
+*
+* @author Sjaak
+* @author Franka Buytenhuijs / s4356845
+* @author Wesley van Hoorn / s4018044
+*/
 public class GridView extends JPanel implements Grid
 {
     private BufferedImage  gridImage;
