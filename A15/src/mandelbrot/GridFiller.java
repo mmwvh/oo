@@ -64,10 +64,7 @@ public class GridFiller extends SwingWorker<Object, List<ColorPoint>> {
 		for (int i = startx; i < endx; i++) {
 			double y = area.getY();
 			for (int j = starty; j < endy; j++) {
-
 				int color = colorChooser.getColorIndex(x, y);
-
-				//System.out.printf("gx: %d, gy: %d, ax: %f, ay: %f, c: %d\n", i, j, x, y, color);
 				
 				int[] rgb = color == -1 ? RGBColors.BLACK : rgbColors
 						.getColor(color);
