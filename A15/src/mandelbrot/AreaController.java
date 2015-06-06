@@ -20,10 +20,13 @@ public class AreaController  {
         fillArea();
     }
 
+    /**
+     * calculates the new area's after the zooming
+     */
     public void fillArea() {
     	
-		Area area = new Area(a.getX(), a.getX(),a.getWidth(), a.getHeight());
-		Area area2 = new Area (a.getX()+(a.getWidth()/2), a.getX(), a.getWidth(), a.getHeight());
+		Area area = new Area(a.getX(), a.getY(),a.getWidth(), a.getHeight());
+		Area area2 = new Area (a.getX()+(a.getWidth()/2), a.getY(), a.getWidth(), a.getHeight());
 		Area area3 = new Area (a.getX(), (a.getY()-a.getHeight()/2), a.getWidth(), a.getHeight());
 		Area area4 = new Area (a.getX()+(a.getWidth()/2), (a.getY()-a.getHeight()/2), a.getWidth(), a.getHeight());
 		
