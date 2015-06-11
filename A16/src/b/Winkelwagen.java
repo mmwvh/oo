@@ -37,9 +37,33 @@ public class Winkelwagen {
 		return cost + delivercost;
 	}
 	
+	
 	public void afrekenen(){
 		totalcost = totalCost();
-		betaalmiddel.pay(totalcost);
+		System.out.println("De kosten zijn: " + totalcost);
+		boolean gelukt = betaalmiddel.pay(totalcost);
+		if(gelukt){
+			System.out.println("De betaling is geslaagd, tot ziens");
+			System.exit(0);
+		}
+		else{
+			System.out.println("Helaas de betaling is niet gelukt, probeer opnieuw");
+			afrekenen();
+		}
+	}
+	
+	public void setBetaalMiddelCreditCard(CreditCard bm){
+		this.betaalmiddel = bm;
+	}
+
+	public void setBetaalMiddelPayPal(Paypal bm) {
+		this.betaalmiddel = bm;
+		
+	}
+	
+	public void setBetaalMiddeliDeal(iDeal bm) {
+		this.betaalmiddel = bm;
+		
 	}
 
 }
