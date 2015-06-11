@@ -4,14 +4,20 @@ import java.util.Scanner;
 
 public class Winkelbediende {
 
-	
+	/**
+	 *
+	 * @author Franka Buytenhuijs / s4356845
+	 * @author Wesley van Hoorn / s4018044
+	 */
 	private Winkelwagen wg;
 	public Winkelbediende(Winkelwagen wg){
 		this.wg = wg;
 		Welkom();
 	}
 	
-	
+	/**
+	 * laat welkoms bericht zien en vraagt de gebruiker wat hij wil deon
+	 */
 	public void Welkom(){
 		System.out.println("Wat wilt u doen?");
 		System.out.println("Toets 1 voor winkelen, toets 2 voor afrekenen");
@@ -27,6 +33,9 @@ public class Winkelbediende {
 		}
 	}
 	
+	/**
+	 * vraagt de gebruiker hoe hij wil betalen
+	 */
 	public void kiesBetaalMiddel(){
 		System.out.println("Hoe wilt u betalen ");
 		System.out.println("Kies 1 voor: Ideal \nKies 2 voor: PayPal \nKies 3 voor: CreditCard ");
@@ -47,6 +56,9 @@ public class Winkelbediende {
 		}
 	}
 	
+	/**
+	 * vraagt de gebruiker welk artikel hij wil kopen
+	 */
 	public void artikelKopen(){
 		Artikel a;
 		

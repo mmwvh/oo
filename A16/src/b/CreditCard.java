@@ -1,5 +1,9 @@
 package b;
-
+/**
+*
+* @author Franka Buytenhuijs / s4356845
+* @author Wesley van Hoorn / s4018044
+*/
 import java.util.Scanner;
 
 public class CreditCard extends Betaalmiddel {

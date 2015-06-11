@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Winkelwagen {
-
+	/**
+	 *
+	 * @author Franka Buytenhuijs / s4356845
+	 * @author Wesley van Hoorn / s4018044
+	 */
 	private List<Artikel> winkelwagen = new ArrayList<Artikel>();
 	private Betaalmiddel betaalmiddel;
 	private double totalcost = 0;
@@ -12,10 +16,18 @@ public class Winkelwagen {
 		betaalmiddel = new iDeal(totalcost);
 	}
 
+	/**
+	 * voegt artikel a toe aan het winkelwagentje
+	 * @param a
+	 */
 	public void addToCart(Artikel a) {
 		winkelwagen.add(a);
 	}
 
+	/**
+	 * Haalt artikel a uit het winkelwagentje
+	 * @param a
+	 */
 	public void removeFromCart(Artikel a) {
 		for(int i = 0; i<winkelwagen.size(); i++){
 			if(winkelwagen.get(i) == a){
@@ -25,6 +37,9 @@ public class Winkelwagen {
 			
 	}
 
+	/*
+	 * berekent de totale kosten voor de gebruiker
+	 */
 	public double totalCost() {
 		double cost = 0;
 		double delivercost = 0;
@@ -37,7 +52,9 @@ public class Winkelwagen {
 		return cost + delivercost;
 	}
 	
-	
+	/**
+	 * Zorgt dat de gebruiker kan betalen
+	 */
 	public void afrekenen(){
 		totalcost = totalCost();
 		System.out.println("De kosten zijn: " + totalcost);
