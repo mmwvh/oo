@@ -1,0 +1,20 @@
+OpenVraag(
+    "Wat is de complexiteit van binair zoeken?",
+    "O(log N)"
+    );
+OpenVraag(
+    "Hoe lees je in Java een integer i uit een scanner s?",
+    "i = s.nextInt();",
+    2);
+OpenVraag(
+    "Is er verschil tussen een interface en een abstracte klasse?",
+    "Ja",
+    5);
+OpenVraag(
+    "Hoeveel constructoren je minstens maken bij een klasse in Java?",
+    "0",
+    2);
+OpenVraag(
+    "Is er een maximum aantal constructoren van een klasse in Java?",
+    "Nee"
+    );

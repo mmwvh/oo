@@ -1,0 +1,43 @@
+MultipleChoice(
+    "Wat is de complexiteit van slim in situ sorteren?",
+    new String [] {
+        "O(N^2)",
+        "O(N log N)",
+        "O(N)",
+        "O(log N)"},
+    1,
+    4);
+MultipleChoice(
+    "Hoe print je \"Hello world\" op een regel in Java?",
+    new String [] {
+        "System.out.print(\"Hello world\");",
+        "System.out.println(\"Hello world\");",
+        "cout << \"Hello world\";"}, 
+    1
+    );
+MultipleChoice(
+    "Hoe lees je in Java een niet leeg woord uit scanner s?",
+    new String []{
+        "s.nextline()",
+        "s.next(\"\\S+\")",
+        "s.next(\"\\a*\")",
+        "s.next(\"\\S*\")",
+        "s.next(\"\\\\s+\")",
+        "s.next(\"\\s+\")",
+        "s.nextString(\"\\s*\")",
+        "s.next(\"\\\\S+\")",
+        "s.nextString()"},
+    7,
+    1);
+MultipleChoice(
+    “Een rij heeft in Java een vaste grootte“,
+    new String []{
+        “Goed”,
+        “Fout”},
+    0);
+MultipleChoice(
+    “Een lijst heeft in Java een vaste lengte“,
+    new String []{
+        “Goed”,
+        “Fout”},
+    1);
